@@ -1,8 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import axios from "axios";
 import axios from "axios";
-
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -14,42 +12,42 @@ const ProductDetail = () => {
       .then((res) => setProduct(res.data));
   }, [id]);
 
-  if (!product) return <div className="text-center mt-10"><span className="loader"></span></div>;
+  if (!product)
+    return (
+      <div className="text-center mt-10">
+        <span className="loader"></span>
+      </div>
+    );
 
   return (
-
     <div className="flex min-h-screen p-4 dark:bg-gray-900 dark:text-white m-auto justify-center ">
       <Link to="/" className="text-blue-500">
-      <div className="flex justify-center items-center gap-2">
-
-        <span className="text-2xl">←</span> <span>
-          Back
-          </span> 
-      </div>
+        <div className="flex justify-center items-center gap-2">
+          <span className="text-2xl">←</span> <span>Back</span>
+        </div>
       </Link>
       <div className="flex justify-center m-auto w-[800px] h-items-center">
-
-      <div className="flex flex-col gap-6 mt-4 mx-auto">
-        <img
-          src={product.image}
-          alt={product.title}
-          className="w-80 h-80 object-contain"
+        <div className="flex flex-col gap-6 mt-4 mx-auto">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-80 h-80 object-contain"
           />
-        <div>
-          <h2 className="text-2xl font-bold">{product.title}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
-            {product.category}
-          </p>
-          <p className="text-xl font-semibold text-blue-600">
-            ${product.price}
-          </p>
-          <p className="mt-4">{product.description}</p>
-          <div className="mt-2 text-yellow-500">
-            ⭐ {product.rating?.rate} ({product.rating?.count})
+          <div>
+            <h2 className="text-2xl font-bold">{product.title}</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              {product.category}
+            </p>
+            <p className="text-xl font-semibold text-blue-600">
+              ${product.price}
+            </p>
+            <p className="mt-4">{product.description}</p>
+            <div className="mt-2 text-yellow-500">
+              ⭐ {product.rating?.rate} ({product.rating?.count})
+            </div>
           </div>
         </div>
       </div>
-          </div>
     </div>
   );
 };

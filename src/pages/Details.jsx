@@ -9,14 +9,19 @@ const Details = () => {
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProduct(data);
         setLoading(false);
       });
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10"><span className="loader"></span></p>;
+  if (loading)
+    return (
+      <p className="text-center mt-10">
+        <span className="loader"></span>
+      </p>
+    );
   if (!product) return <p className="text-center mt-10">Product not found.</p>;
 
   return (

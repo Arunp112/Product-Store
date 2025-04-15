@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
       <Header onSearch={setSearchTerm} />
-      {/* Pass searchTerm via context or props if needed */}
+
       <main className="flex-grow">
         <Outlet context={{ searchTerm }} />
       </main>

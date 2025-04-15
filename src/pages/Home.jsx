@@ -17,11 +17,13 @@ const Home = () => {
       try {
         const [productsRes, categoriesRes] = await Promise.all([
           axios.get("https://fakestoreapi.com/products"),
-          axios.get("https://fakestoreapi.com/products/categories")
+          axios.get("https://fakestoreapi.com/products/categories"),
         ]);
         setProducts(productsRes.data);
         setFiltered(productsRes.data);
         setCategories(["all", ...categoriesRes.data]);
+        console.log("product", productsRes.data);
+        console.log("category", categoriesRes.data);
       } catch (err) {
         setError(true);
       } finally {
@@ -70,18 +72,21 @@ const Home = () => {
 
       {/* Product List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {loading && <div className="flex justify-center items-center"> <p className="loader"></p></div>}
-        {error && <p className="text-red-500">Error loading products.</p>}
-        {!loading && !error && filtered.length > 0 ? (
-          filtered.map((p) => <ProductCard key={p.id} product={p} />)
-        ) : (
-          !loading &&
-          !error && (
-            <div className="col-span-full text-center text-gray-500 dark:text-gray-400 text-xl">
-              🛒 No products found for your search or selected category.
-            </div>
-          )
+        {loading && (
+          <div className="flex justify-center items-center">
+            {" "}
+            <p className="loader"></p>
+          </div>
         )}
+        {error && <p className="text-red-500">Error loading products.</p>}
+        {!loading && !error && filtered.length > 0
+          ? filtered.map((p) => <ProductCard key={p.id} product={p} />)
+          : !loading &&
+            !error && (
+              <div className="col-span-full text-center text-gray-500 dark:text-gray-400 text-xl">
+                🛒 No products found for your search or selected category.
+              </div>
+            )}
       </div>
     </div>
   );
