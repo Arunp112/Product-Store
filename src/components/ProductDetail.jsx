@@ -20,7 +20,12 @@ const ProductDetail = () => {
 
     <div className="flex min-h-screen p-4 dark:bg-gray-900 dark:text-white m-auto justify-center ">
       <Link to="/" className="text-blue-500">
-        <span className="text-2xl">←</span> Back
+      <div className="flex justify-center items-center gap-2">
+
+        <span className="text-2xl">←</span> <span>
+          Back
+          </span> 
+      </div>
       </Link>
       <div className="flex justify-center m-auto w-[800px] h-items-center">
 
