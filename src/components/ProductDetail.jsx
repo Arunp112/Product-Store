@@ -22,7 +22,7 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen">
       <div className=" p-4 dark:bg-gray-900 dark:text-white justify-center ">
-        <div className="bg-red-300">
+        <div className="">
           <Link to="/" className="text-blue-500">
             <div className="flex justify-between   items-center gap-2">
               <div>
