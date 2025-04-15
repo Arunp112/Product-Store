@@ -22,8 +22,6 @@ const Home = () => {
         setProducts(productsRes.data);
         setFiltered(productsRes.data);
         setCategories(["all", ...categoriesRes.data]);
-        console.log("product", productsRes.data);
-        console.log("category", categoriesRes.data);
       } catch (err) {
         setError(true);
       } finally {
