@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./pages/Home";
-// import ProductDetails from "./pages/ProductDetails";
-import ProductDetails from "./components/ProductDetail";
-import ThemeToggle from "./components/ThemeToggle";
-import Footer from "./components/Footer";
+// import ProductDetail from "./pages/ProductDetail";
+import ProductDetail from "./components/ProductDetail";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
-
   return (
-    <Router>
-      <div className="bg-white text-black dark:bg-gray-900 dark:text-white min-h-screen transition">
-        <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+    <ThemeProvider>
+      <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Route>
         </Routes>
-      </div>
-        <div><Footer/></div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 

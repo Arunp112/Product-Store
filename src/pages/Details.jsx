@@ -16,7 +16,7 @@ const Details = () => {
       });
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <p className="text-center mt-10"><span className="loader"></span></p>;
   if (!product) return <p className="text-center mt-10">Product not found.</p>;
 
   return (

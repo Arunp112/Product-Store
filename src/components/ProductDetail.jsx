@@ -1,41 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+// import axios from "axios";
+import axios from "axios";
 
-const ProductDetails = () => {
+
+const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState();
-  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setProduct(data);
-        setLoading(false);
-      });
+    axios
+      .get(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => setProduct(res.data));
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!product) return <p className="text-center mt-10">Product not found.</p>;
+  if (!product) return <div className="text-center mt-10"><span className="loader"></span></div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <div className="flex flex-col md:flex-row gap-10">
+
+    <div className="flex min-h-screen p-4 dark:bg-gray-900 dark:text-white m-auto justify-center ">
+      <Link to="/" className="text-blue-500">
+        <span className="text-2xl">←</span> Back
+      </Link>
+      <div className="flex justify-center m-auto w-[800px] h-items-center">
+
+      <div className="flex flex-col gap-6 mt-4 mx-auto">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full md:w-1/2 h-96 object-contain"
-        />
-        <div className="space-y-4">
-          <h1 className="text-3xl font-bold">{product.title}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">{product.category}</p>
-          <p className="text-2xl text-green-600 font-bold">${product.price}</p>
-          <p className="text-gray-700 dark:text-gray-200">{product.description}</p>
-          <p className="text-yellow-500">⭐ {product.rating?.rate} / 5 ({product.rating?.count} reviews)</p>
+          className="w-80 h-80 object-contain"
+          />
+        <div>
+          <h2 className="text-2xl font-bold">{product.title}</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-300">
+            {product.category}
+          </p>
+          <p className="text-xl font-semibold text-blue-600">
+            ${product.price}
+          </p>
+          <p className="mt-4">{product.description}</p>
+          <div className="mt-2 text-yellow-500">
+            ⭐ {product.rating?.rate} ({product.rating?.count})
+          </div>
         </div>
       </div>
+          </div>
     </div>
   );
 };
 
-export default ProductDetails;
+export default ProductDetail;
