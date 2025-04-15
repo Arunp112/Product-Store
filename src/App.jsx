@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 // import ProductDetails from "./pages/ProductDetails";
 import ProductDetails from "./components/ProductDetail";
 import ThemeToggle from "./components/ThemeToggle";
+import Footer from "./components/Footer";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
       </div>
+        <div><Footer/></div>
     </Router>
   );
 }
